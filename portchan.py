@@ -24,16 +24,6 @@ vlans = args.vlans
 mode = args.mode
 switchlist = args.switch
 
-def create_master_conf(ponum, desc, vlans):
-    args = {'ponum': ponum, 'desc': desc, 'vlans': vlans}
-
-    return CONF_MASTER.format(**args)
-
-def create_slave_conf(ponum, desc, vlans, prefix, ifnum, mode):
-    args = {'ponum': ponum, 'desc': desc, 'vlans': vlans, 'prefix': prefix, 'ifnum': ifnum, 'mode': mode}
-
-    return CONF_SLAVE.format(**args)
-
 class Switch(object):
     def __init__(self, switch, vlans, ponum, mode, ifnum, num, prefix):
         self.switch = switch

@@ -1,0 +1,29 @@
+conf:
+    helpers: ['192.0.2.4', '192.0.2.5']
+    dhcpv6: ['eventv666']
+
+vlans:
+    ipv4only:
+        vid: 10
+        ipv4: '192.0.2.0/24'
+
+    dualstack:
+        vid: 20
+        ipv4: '192.0.2.0/24'
+        ipv6: '2001:db8:1337:42::/64'
+
+    nodhcp:
+        vid: 30
+        ipv4: '192.0.2.0/24'
+        dhcp: False
+
+    invertpriority:
+        vid: 40
+        ipv4: '192.0.2.0/24'
+        ipv6: '2001:db8:1337:42::/64'
+        hsrp_invert: True
+
+    jumboframes:
+        vid: 90
+        l2mtu: 9000
+

@@ -1,0 +1,36 @@
+{%- for vlan in vlans %}
+vlan {{ vlan.vid }}
+ name {{ vlan.name }}
+ {%- if vlan.l2mtu %}
+ mtu {{ vlan.l2mtu }}
+ {%- endif %}
+{% endfor %}
+
+{% for vlan in vlans %}
+interface vlan {{ vlan.vid }}
+ no shutdown
+ description {{ vlan.name }}
+ load-interval 30
+ {%- if vlan.ipv4 %}
+ no ip proxy-arp
+ ip flow ingress
+ ip pim sparse-mode
+ {%- if vlan.urpf %}
+ ip verify unicast source reachable-via rx
+ {%- endif %}
+ ip address {{ vlan.gw4 }} {{ vlan.mask4 }}
+ {%- for hlpr in vlan.helpers %}
+ ip helper-address {{ hlpr -}}
+ {% endfor %}
+ {%- endif %}
+ {%- if vlan.ipv6 %}
+ {%- if vlan.urpf %}
+ ipv6 verify unicast reverse-path
+ {%- endif %}
+ ipv6 address {{ vlan.gw6 }}/{{ vlan.prefixlen6 }}
+ ipv6 nd other-config-flag
+ {%- for srv in vlan.dhcpv6 %}
+ ipv6 dhcp server {{ srv -}}
+ {% endfor %}
+ {%- endif %}
+{% endfor %}

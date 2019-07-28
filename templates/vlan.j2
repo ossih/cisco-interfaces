@@ -1,0 +1,8 @@
+{%- for vlan in vlans %}
+vlan {{ vlan.vid }}
+ name {{ vlan.name }}
+ {%- if vlan.l2mtu %}
+ mtu {{ vlan.l2mtu }}
+ {%- endif %}
+{% endfor %}
+

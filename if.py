@@ -19,7 +19,7 @@ args = parser.parse_args()
 if args.event:
     event = args.event
 else:
-    event = args.config.split('.')[0]
+    event = args.config.rsplit('.')[0]
 
 
 class Vlan(object):

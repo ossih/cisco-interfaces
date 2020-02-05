@@ -29,6 +29,7 @@ class Vlan(object):
         self.dhcp = vconf.get('dhcp', True)
         self.urpf = vconf.get('urpf', True)
         self.l2mtu = vconf.get('l2mtu', None)
+        self.l2only = vconf.get('l2only', False)
         self.hsrp_invert = vconf.get('hsrp_invert', False)
         self.helpers = self.dhcp and helpers or []
 

@@ -6,7 +6,8 @@ vlan {{ vlan.vid }}
  {%- endif %}
 {% endfor %}
 
-{% for vlan in vlans %}
+{%- for vlan in vlans %}
+{%- if not vlan.l2only %}
 interface vlan {{ vlan.vid }}
  no shutdown
  description {{ vlan.name }}
@@ -39,4 +40,5 @@ interface vlan {{ vlan.vid }}
  standby 2 priority {{ vlan.hsrp_prio2 }}
  standby 2 preempt
  {%- endif %}
-{% endfor %}
+{% endif %}
+{%- endfor %}

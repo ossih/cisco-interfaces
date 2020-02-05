@@ -6,7 +6,8 @@ vlan {{ vlan.vid }}
  {%- endif %}
 {% endfor %}
 
-{% for vlan in vlans %}
+{%- for vlan in vlans %}
+{%- if not vlan.l2only %}
 interface vlan {{ vlan.vid }}
  no shutdown
  description {{ vlan.name }}
@@ -31,6 +32,9 @@ interface vlan {{ vlan.vid }}
  ipv6 nd other-config-flag
  {%- for srv in vlan.dhcpv6 %}
  ipv6 dhcp server {{ srv -}}
- {% endfor %}
+ {%- endfor %}
  {%- endif %}
-{% endfor %}
+{% endif %}
+{%- endfor %}
+
+

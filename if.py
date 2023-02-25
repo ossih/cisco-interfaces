@@ -62,10 +62,10 @@ class Vlan(object):
             self.prefixlen6 = self.net6.prefixlen
 
 with open(args.config, 'r') as f:
-    config = yaml.load(f)
+    config = yaml.safe_load(f)
 
 conf = config['conf']
-helpers = conf['helpers']
+helpers = conf['dhcp']['helpers']
 dhcpv6 = conf['dhcpv6']
 
 vlans = []

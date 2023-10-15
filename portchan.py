@@ -12,6 +12,7 @@ parser.add_argument('-n', '--num', type=int, default=2)
 parser.add_argument('-v', '--vlans', default='all')
 parser.add_argument('-m', '--mode', default='active')
 parser.add_argument('-s', '--switch', default=[], action='append')
+parser.add_argument('-l', '--liscain', action='store_true')
 
 args = parser.parse_args()
 
@@ -23,13 +24,15 @@ num = args.num
 vlans = args.vlans
 mode = args.mode
 switchlist = args.switch
+liscain = args.liscain
 
 class Switch(object):
-    def __init__(self, switch, vlans, ponum, mode, ifnum, num, prefix):
+    def __init__(self, switch, vlans, ponum, mode, ifnum, num, prefix, liscain):
         self.switch = switch
         self.vlans = vlans
         self.ponum = ponum
         self.mode = mode
+        self.liscain = liscain
 
         self.slaves = []
         for i in range(num):
@@ -40,7 +43,7 @@ ifnum = offset + 1
 ponum = first
 switches = []
 for switch in switchlist:
-    switches.append(Switch(switch, vlans, ponum, mode, ifnum, num, prefix))
+    switches.append(Switch(switch, vlans, ponum, mode, ifnum, num, prefix, liscain))
 
     ifnum+=num
     ponum+=1

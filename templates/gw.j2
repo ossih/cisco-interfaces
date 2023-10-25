@@ -26,7 +26,7 @@ interface vlan {{ vlan.vid }}
  {%- endif %}
  {%- if vlan.ipv6 %}
  {%- if vlan.urpf %}
- ipv6 verify unicast reverse-path
+ ! ipv6 verify unicast source reachable-via rx
  {%- endif %}
  ipv6 address {{ vlan.gw6 }}/{{ vlan.prefixlen6 }}
  ipv6 nd other-config-flag

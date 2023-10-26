@@ -29,6 +29,7 @@ interface vlan {{ vlan.vid }}
  ! ipv6 verify unicast source reachable-via rx
  {%- endif %}
  ipv6 address {{ vlan.gw6 }}/{{ vlan.prefixlen6 }}
+ ipv6 nd ra interval 4
  ipv6 nd other-config-flag
  {%- for srv in vlan.dhcpv6 %}
  ipv6 dhcp server {{ srv -}}
